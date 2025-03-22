@@ -1,21 +1,23 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using JoUnityAddOn;
+using JoUnityAddOn.SceneManagement;
+using Random = UnityEngine.Random;
 
-[System.Serializable]
+[Serializable]
 public class DateWave
 {
-    
+    [Header("Date Wave Settings")]
     [SerializeField, Tooltip("Set up the possible dates.")]
     private DateScriptableObject[] dates;
-    [SerializeField, Tooltip("Set up the possible dates.")]
+    [SerializeField, Tooltip("Set to true if the dates should be saved.")]
     private bool saveDates = true;
     [SerializeField, Min(0),
      Tooltip("Set the maximum amount of dates that the player can have. If set to 0, " +
              "the player will have a date with everyone in this wave.")]
-    private int maxAmountOfDates;
-    
-    private List<DateScriptableObject> _datesVisited;
+    private int maxAmountOfDates = 0;
     
     public DateScriptableObject[] Dates
     {
@@ -34,20 +36,39 @@ public class DateWave
 public class DateManager : MonoBehaviour
 {
     [Header("Date Settings")]
+    [SerializeField, Tooltip("Set to true if the game should use the date wave mechanic.")]
+    private bool useDateWaves = false;
     [SerializeField, Tooltip("Set up the possible dates.")]
     private DateScriptableObject[] dates;
+    
     [SerializeField]
     private DateWave[] dateWaves;
+    [SerializeField, Tooltip("Set up when the pop shows up."), Min(1)]
+    private int popUpAfterWave = 1;
+    [SerializeField, Tooltip("Set up when the date app ends. If set to 0, it will end once every wave has passed.")]
+    private int endDateApp = 3;
+    
+    [SerializeField, Tooltip("Set the Pop Up Game Object.")]
+    private GameObject popUpObject = null;
     
     private List<DateScriptableObject> _datesAccepted;
-    
-    #region SingletonSetUp
+    private Queue<DateScriptableObject> _datesQueued;
+    private DateWave _currentDateWave;
+    private int _dateWaveId;
     
     public static DateManager instance { get; protected set; }
+    
+    #region Startup and Cleanup
 
     protected virtual void Awake()
     {
         _datesAccepted = new List<DateScriptableObject>();
+        _datesQueued = new Queue<DateScriptableObject>();
+        if (dateWaves != null && dateWaves.Length > 0)
+        {
+            SetNextWave();
+        }
+        
         SetInstance();
     }
 
@@ -88,18 +109,59 @@ public class DateManager : MonoBehaviour
             _datesAccepted.Add(date);
     }
 
-    public DateScriptableObject GetRandomDate()
+    public DateScriptableObject GetDate()
     {
+        if (useDateWaves)
+        {
+            if (_datesQueued.Count <= 0)
+                SetNextWave();
+            
+            return _datesQueued.Dequeue();
+        }
+        
         if (dates != null && dates.Length > 1)
         {
             return dates[Random.Range(0, dates.Length)];
         }
-        else if (dates != null)
+        if (dates != null)
         {
             return dates[0];
         }
         
         return null;
+    }
+
+    private void SetNextWave()
+    {
+        if (_currentDateWave == null)
+        {
+            _currentDateWave = dateWaves[0];
+            
+            List<DateScriptableObject> dates = RandomizeDates(_currentDateWave.Dates);
+            
+            foreach (DateScriptableObject date in dates)
+                _datesQueued.Enqueue(date);
+            
+            return;
+        }
+
+        if (_dateWaveId == popUpAfterWave && popUpObject != null)
+        {
+            popUpObject.SetActive(true);
+        }
+        else if (_dateWaveId >= endDateApp && _dateWaveId != 0)
+            SceneManager.LoadPreviousScene();
+        
+
+        _dateWaveId++;
+        Debug.Log("------- Next Date Wave --------");
+        if (_dateWaveId >= dateWaves.Length)
+            _dateWaveId = 0;
+        
+        _currentDateWave = dateWaves[_dateWaveId];
+        
+        foreach (DateScriptableObject date in _currentDateWave.Dates)
+            _datesQueued.Enqueue(date);
     }
 
     private void Update()
@@ -121,8 +183,29 @@ public class DateManager : MonoBehaviour
         }
     }
 
+    private List<DateScriptableObject> RandomizeDates(DateScriptableObject[] dates)
+    {
+        List<DateScriptableObject> dateList = new List<DateScriptableObject>();
+        foreach (DateScriptableObject date in dates)
+            dateList.Add(date);
+        
+        dateList = dateList.OrderBy(_ => Random.value).ToList();
+        
+        return dateList;
+    }
+    
+    public DateScriptableObject[] Dates
+    {
+        get { return dates; }
+    }
+    
     public DateWave[] DateWaves
     {
         get { return dateWaves; }
+    }
+
+    public bool UseDateWaves
+    {
+        get { return useDateWaves; }
     }
 }

@@ -27,7 +27,7 @@ public class DateScript : MonoBehaviour
         {
             if (_currentDate == null)
             {
-                _currentDate = _dm.GetRandomDate();
+                _currentDate = _dm.GetDate();
                 return;
             }
             
@@ -61,9 +61,9 @@ public class DateScript : MonoBehaviour
             _dm = DateManager.instance;
             return false;
         }
-        else if (_dm.DateWaves == null || _dm.DateWaves.Length < 1)
+        if (_dm.UseDateWaves && (_dm.DateWaves == null || _dm.DateWaves.Length < 1) || !_dm.UseDateWaves && (_dm.Dates == null || _dm.Dates.Length < 1))
         {
-            Debug.LogError("There are no dates in the dateManager.");
+            Debug.LogError("There are no dates in the dateManager in waves or non waves mode.");
             return false;
         }
         if (dateNameText == null)

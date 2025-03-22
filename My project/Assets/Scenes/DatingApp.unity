@@ -874,8 +874,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have been declined by every girl on this app. Because of this you unlocked
-    Everything Mode! Do you want to activate it?
+  m_text: 'You are <u>out of </u>human <u>options.</u>
+
+    Do you want to turn on
+    everything mode?????'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1338,10 +1340,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb209e94ebc76e64f81709e882bf0ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useDateWaves: 1
   dates:
   - {fileID: 11400000, guid: fa671af8745429b44b736b9799e0b377, type: 2}
   - {fileID: 11400000, guid: 05ef6200f30c9ad4ca69f3b784ffa541, type: 2}
-  dateWaves: []
+  dateWaves:
+  - dates:
+    - {fileID: 11400000, guid: fa671af8745429b44b736b9799e0b377, type: 2}
+    - {fileID: 11400000, guid: 05ef6200f30c9ad4ca69f3b784ffa541, type: 2}
+    - {fileID: 11400000, guid: fa671af8745429b44b736b9799e0b377, type: 2}
+    saveDates: 1
+    maxAmountOfDates: 0
+  - dates:
+    - {fileID: 11400000, guid: 05ef6200f30c9ad4ca69f3b784ffa541, type: 2}
+    - {fileID: 11400000, guid: 05ef6200f30c9ad4ca69f3b784ffa541, type: 2}
+    - {fileID: 11400000, guid: fa671af8745429b44b736b9799e0b377, type: 2}
+    - {fileID: 11400000, guid: fa671af8745429b44b736b9799e0b377, type: 2}
+    - {fileID: 11400000, guid: 05ef6200f30c9ad4ca69f3b784ffa541, type: 2}
+    saveDates: 1
+    maxAmountOfDates: 0
+  popUpAfterWave: 1
+  endDateApp: 3
+  popUpObject: {fileID: 0}
 --- !u!1 &1250324465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,7 +1378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1250324466
 RectTransform:
   m_ObjectHideFlags: 0
