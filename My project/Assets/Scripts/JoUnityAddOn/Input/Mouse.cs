@@ -2,6 +2,7 @@
 
 namespace JoUnityAddOn.Input
 {
+    
     public class Mouse
     {
         /// <summary>

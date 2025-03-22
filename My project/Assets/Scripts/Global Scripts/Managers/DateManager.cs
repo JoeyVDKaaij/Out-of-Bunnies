@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using JoUnityAddOn;
 
 [System.Serializable]
 public class DateWave
 {
+    
     [SerializeField, Tooltip("Set up the possible dates.")]
     private DateScriptableObject[] dates;
     [SerializeField, Tooltip("Set up the possible dates.")]
