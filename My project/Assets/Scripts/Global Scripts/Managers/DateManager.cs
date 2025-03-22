@@ -1,13 +1,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class DateWave
+{
+    [SerializeField, Tooltip("Set up the possible dates.")]
+    private DateScriptableObject[] dates;
+    [SerializeField, Tooltip("Set up the possible dates.")]
+    private bool saveDates = true;
+    [SerializeField, Min(0),
+     Tooltip("Set the maximum amount of dates that the player can have. If set to 0, " +
+             "the player will have a date with everyone in this wave.")]
+    private int maxAmountOfDates;
+    
+    private List<DateScriptableObject> _datesVisited;
+    
+    public DateScriptableObject[] Dates
+    {
+        get { return dates; }
+    }
+    public bool SaveDates
+    {
+        get { return saveDates; }
+    }
+    public int MaxAmountOfDates
+    {
+        get { return maxAmountOfDates; }
+    }
+}
+
 public class DateManager : MonoBehaviour
 {
     [Header("Date Settings")]
     [SerializeField, Tooltip("Set up the possible dates.")]
     private DateScriptableObject[] dates;
+    [SerializeField]
+    private DateWave[] dateWaves;
     
-    private List<DateScriptableObject> datesAccepted;
+    private List<DateScriptableObject> _datesAccepted;
     
     #region SingletonSetUp
     
@@ -15,7 +45,7 @@ public class DateManager : MonoBehaviour
 
     protected virtual void Awake()
     {
-        datesAccepted = new List<DateScriptableObject>();
+        _datesAccepted = new List<DateScriptableObject>();
         SetInstance();
     }
 
@@ -52,7 +82,8 @@ public class DateManager : MonoBehaviour
 
     public void AcceptDate(DateScriptableObject date)
     {
-        datesAccepted.Add(date);
+        if (dateWaves[0].SaveDates && _datesAccepted != null)
+            _datesAccepted.Add(date);
     }
 
     public DateScriptableObject GetRandomDate()
@@ -71,25 +102,25 @@ public class DateManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _datesAccepted != null)
         {
             Debug.Log("------- Accepted Dates -------");
-            foreach (DateScriptableObject date in datesAccepted)
+            foreach (DateScriptableObject date in _datesAccepted)
             {
                 Debug.Log(date.name);
             }
             Debug.Log("------------------------------");
         }
 
-        if (Input.GetKeyDown(KeyCode.Delete))
+        if (Input.GetKeyDown(KeyCode.Delete) && _datesAccepted != null)
         {
-            datesAccepted.Clear();
+            _datesAccepted.Clear();
             Debug.Log("------- Accepted Dates Removed --------");
         }
     }
 
-    public DateScriptableObject[] Dates
+    public DateWave[] DateWaves
     {
-        get { return dates; }
+        get { return dateWaves; }
     }
 }

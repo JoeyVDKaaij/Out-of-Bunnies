@@ -61,7 +61,7 @@ public class DateScript : MonoBehaviour
             _dm = DateManager.instance;
             return false;
         }
-        else if (_dm.Dates == null || _dm.Dates.Length < 1)
+        else if (_dm.DateWaves == null || _dm.DateWaves.Length < 1)
         {
             Debug.LogError("There are no dates in the dateManager.");
             return false;
