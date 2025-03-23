@@ -1349,7 +1349,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: fa671af8745429b44b736b9799e0b377, type: 2}
     - {fileID: 11400000, guid: 05ef6200f30c9ad4ca69f3b784ffa541, type: 2}
     - {fileID: 11400000, guid: fa671af8745429b44b736b9799e0b377, type: 2}
-    saveDates: 1
+    saveDates: 0
     maxAmountOfDates: 0
   - dates:
     - {fileID: 11400000, guid: 05ef6200f30c9ad4ca69f3b784ffa541, type: 2}
@@ -1360,8 +1360,8 @@ MonoBehaviour:
     saveDates: 1
     maxAmountOfDates: 0
   popUpAfterWave: 1
-  endDateApp: 3
-  popUpObject: {fileID: 0}
+  endDateApp: 2
+  popUpObject: {fileID: 1250324465}
 --- !u!1 &1250324465
 GameObject:
   m_ObjectHideFlags: 0

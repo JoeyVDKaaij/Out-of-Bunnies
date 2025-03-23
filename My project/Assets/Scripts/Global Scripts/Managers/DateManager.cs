@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using JoUnityAddOn;
-using JoUnityAddOn.SceneManagement;
+using OGSceneManagment = UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using JoUnityAddOn.SceneManagement;
 
 [Serializable]
 public class DateWave
@@ -93,8 +94,8 @@ public class DateManager : MonoBehaviour
         {
             instance = this;
                 
-            if (transform.parent.gameObject != null) DontDestroyOnLoad(transform.parent.gameObject);
-            else DontDestroyOnLoad(gameObject);
+            // if (transform.parent.gameObject != null) DontDestroyOnLoad(transform.parent.gameObject);
+            // else DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
@@ -105,7 +106,7 @@ public class DateManager : MonoBehaviour
 
     public void AcceptDate(DateScriptableObject date)
     {
-        if (dateWaves[0].SaveDates && _datesAccepted != null)
+        if (dateWaves[_dateWaveId].SaveDates && _datesAccepted != null)
             _datesAccepted.Add(date);
     }
 
@@ -145,15 +146,26 @@ public class DateManager : MonoBehaviour
             return;
         }
 
+        
+
+        _dateWaveId++;
         if (_dateWaveId == popUpAfterWave && popUpObject != null)
         {
             popUpObject.SetActive(true);
         }
         else if (_dateWaveId >= endDateApp && _dateWaveId != 0)
-            SceneManager.LoadPreviousScene();
-        
-
-        _dateWaveId++;
+        {
+            Debug.Log(_datesAccepted != null && _datesAccepted.Count > 0);
+            if (_datesAccepted != null && _datesAccepted.Count > 0)
+            {
+                DateScriptableObject date = _datesAccepted[Random.Range(0, _datesAccepted.Count)];
+                OGSceneManagment.Scene scene = SceneManager.GetSceneByName(date.visualNovelScene.name);
+                Debug.Log($"{scene} scene with build index {scene.buildIndex} from {date}");
+                if (scene != null) SceneManager.LoadScene(date.visualNovelScene.name);
+                else SceneManager.LoadScene(0);
+            }
+            else SceneManager.LoadScene(0);
+        }
         Debug.Log("------- Next Date Wave --------");
         if (_dateWaveId >= dateWaves.Length)
             _dateWaveId = 0;
