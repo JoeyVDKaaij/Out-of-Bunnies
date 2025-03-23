@@ -6,6 +6,7 @@ using JoUnityAddOn;
 using OGSceneManagment = UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using JoUnityAddOn.SceneManagement;
+using UnityEditor;
 
 [Serializable]
 public class DateWave
@@ -51,7 +52,9 @@ public class DateManager : MonoBehaviour
     
     [SerializeField, Tooltip("Set the Pop Up Game Object.")]
     private GameObject popUpObject = null;
-    
+    [SerializeField, Tooltip("Set the Pop Up Game Object.")]
+    private SceneAsset scene = null;
+
     private List<DateScriptableObject> _datesAccepted;
     private Queue<DateScriptableObject> _datesQueued;
     private DateWave _currentDateWave;
@@ -155,6 +158,11 @@ public class DateManager : MonoBehaviour
         }
         else if (_dateWaveId >= endDateApp && _dateWaveId != 0)
         {
+            if (scene != null)
+            {
+                SceneManager.LoadScene(scene.name);
+                return;
+            }
             Debug.Log(_datesAccepted != null && _datesAccepted.Count > 0);
             if (_datesAccepted != null && _datesAccepted.Count > 0)
             {

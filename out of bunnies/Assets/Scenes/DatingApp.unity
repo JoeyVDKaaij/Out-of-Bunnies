@@ -1265,6 +1265,7 @@ MonoBehaviour:
   popUpAfterWave: 1
   endDateApp: 2
   popUpObject: {fileID: 2048911027}
+  scene: {fileID: 102900000, guid: 353edbf334acedd4c9568e1c317450e5, type: 3}
 --- !u!1 &1405671102
 GameObject:
   m_ObjectHideFlags: 0

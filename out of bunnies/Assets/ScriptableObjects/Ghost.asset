@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Boo
   sprite: {fileID: 21300000, guid: 600a09c83b5781b47acabd3548f7d943, type: 3}
-  visualNovelScene: {fileID: 102900000, guid: a504faa08ff8c4c4b8fcac63210afd63, type: 3}
+  visualNovelScene: {fileID: 0}
