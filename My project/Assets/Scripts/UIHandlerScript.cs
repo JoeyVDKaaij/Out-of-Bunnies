@@ -5,6 +5,8 @@ public class UIHandlerScript : MonoBehaviour
 {
     public void PlayGame()
     {
+        if (DateManager.instance != null)
+            DestroyImmediate(DateManager.instance.gameObject);
         SceneManager.LoadNextScene();
     }
 

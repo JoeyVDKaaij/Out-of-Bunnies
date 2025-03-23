@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DatingApp.unity
     guid: 45e4755357c266c4b83a6a140755567c
+  - enabled: 1
+    path: Assets/Scenes/VisualNovels/VN Template.unity
+    guid: a504faa08ff8c4c4b8fcac63210afd63
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
