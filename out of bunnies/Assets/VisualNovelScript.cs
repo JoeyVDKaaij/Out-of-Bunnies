@@ -165,14 +165,14 @@ public class VisualNovelScript : MonoBehaviour
 
     public void ChoiceB()
     {
-        vnShotIndex = vnShots[vnShotIndex].ChoiceToShot[0];
+        vnShotIndex = vnShots[vnShotIndex].ChoiceToShot[1];
         waitForButton = false;
         VisualNovelShowShot(vnShots[vnShotIndex]);
     }
 
     public void ChoiceC()
     {
-        vnShotIndex = vnShots[vnShotIndex].ChoiceToShot[0];
+        vnShotIndex = vnShots[vnShotIndex].ChoiceToShot[2];
         waitForButton = false;
         VisualNovelShowShot(vnShots[vnShotIndex]);
     }
