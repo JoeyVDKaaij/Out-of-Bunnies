@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Stick
   sprite: {fileID: 21300000, guid: 3e93acd56db42af4db6211150fabd83c, type: 3}
+  visualNovelScene: {fileID: 102900000, guid: a504faa08ff8c4c4b8fcac63210afd63, type: 3}

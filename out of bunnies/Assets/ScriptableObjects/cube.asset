@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cube
   sprite: {fileID: 21300000, guid: 71888affb4d9ab747af372733f686e82, type: 3}
+  visualNovelScene: {fileID: 102900000, guid: a504faa08ff8c4c4b8fcac63210afd63, type: 3}

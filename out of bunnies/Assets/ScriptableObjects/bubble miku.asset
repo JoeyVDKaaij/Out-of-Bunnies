@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bubble Miku
   sprite: {fileID: 21300000, guid: e165654cb0b1eda40af746385b9c5419, type: 3}
+  visualNovelScene: {fileID: 102900000, guid: a504faa08ff8c4c4b8fcac63210afd63, type: 3}

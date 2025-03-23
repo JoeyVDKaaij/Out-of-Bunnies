@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Noodlessss
   sprite: {fileID: 21300000, guid: b2db3f66c1473f54884e9e6664abba32, type: 3}
+  visualNovelScene: {fileID: 102900000, guid: a504faa08ff8c4c4b8fcac63210afd63, type: 3}

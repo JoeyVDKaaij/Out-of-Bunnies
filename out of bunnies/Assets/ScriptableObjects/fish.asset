@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Foosh
   sprite: {fileID: 21300000, guid: a67946fde86c98644ba7248f509ae9ef, type: 3}
+  visualNovelScene: {fileID: 102900000, guid: a504faa08ff8c4c4b8fcac63210afd63, type: 3}
